@@ -1,25 +1,25 @@
 # Candy Crush in React
 
-This project is in support of the tutorial found [here](https://www.youtube.com/watch?v=PBrEq9Wd6_U)
+This project is inspired by Ania Kubow's [Candy Crush tutorial](https://www.youtube.com/watch?v=PBrEq9Wd6_U).
 
 ### To Start This Project
 
-### `npm i`
+### `npm install`
 
-Install all the packages you need by running the command in your terminal.
+Install the project dependencies by running this command in your terminal.
 
 In the project directory, you can run:
 
-### `npm run start`
+### `npm run dev`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Starts the app in development mode.\
+Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+The page updates automatically when you make changes.\
+Run `npm run lint` to check for lint errors.
 
 
-### MIT Licence
+### MIT License
 
 Copyright (c) 2020 Ania Kubow
 
@@ -27,6 +27,6 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
-*Translation: Ofcourse you can use this for you project! Just make sure to say where you got this from :)
+You are welcome to use this for your project; please credit the original tutorial.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
