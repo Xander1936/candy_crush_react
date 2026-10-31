@@ -1,140 +1,80 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import ScoreBoard from './components/ScoreBoard.jsx'
+import blueCandy from './images/blue-candy.png'
+import greenCandy from './images/green-candy.png'
+import orangeCandy from './images/orange-candy.png'
+import purpleCandy from './images/purple-candy.png'
+import redCandy from './images/red-candy.png'
+import yellowCandy from './images/yellow-candy.png'
+import { createBoard, findMatches, resolveMatches, swapCandies } from './game.js'
 
-const width = 8
-
-const candyColors = [
-  'blue',
-  'green',
-  'orange',
-  'purple',
-  'red',
-  'yellow'
-]
+// Keep the board's color names connected to their image assets.
+const candyImages = {
+  blue: blueCandy,
+  green: greenCandy,
+  orange: orangeCandy,
+  purple: purpleCandy,
+  red: redCandy,
+  yellow: yellowCandy,
+}
 
 const App = () => {
-  const [currentColorArrangement, setCurrentColorArrangement] = useState([])
-
-  const checkForColumnOfFour = () => {
-    for (let i = 0; i < 39; i++) {
-      // Check if the current square is in the last two columns
-      const columnOfFour = [i, i + width, i + width * 2, i + width * 3]
-      // Get the color of the current square
-      const decidedColor = currentColorArrangement[i]
-      // Check if the current square is blank
-      const isBlank = currentColorArrangement[i] === ''
-
-      // Check if all squares in the column of four have the same color and are not blank
-      if (columnOfFour.every(square => currentColorArrangement[square] === decidedColor && !isBlank)) {
-        console.log('column of four');
-        // Set the color of the squares in the column of four to blank
-        columnOfFour.forEach(square => currentColorArrangement[square] = '')
-        return true
-      }
-    }
-  }
-
-  const checkForRowOfFour = () => {
-    for (let i = 0; i < 64; i++) {
-      // Check if the current square is in the last two columns
-      const rowOfFour = [i, i + 1, i + 2, i + 3]
-      // Get the color of the current square
-      const decidedColor = currentColorArrangement[i]
-      const notValid = [5, 6, 7, 13, 14, 15, 21, 22, 23, 29, 30, 31, 37, 38, 39, 45, 46, 47, 53, 54, 55, 62, 63, 64]
-
-      if (notValid.includes(i)) continue
-
-      // Check if all squares in the row of four have the same color and are not blank
-      if (rowOfFour.every(square => currentColorArrangement[square] === decidedColor && !isBlank)) {
-        // console.log('row of four');
-        // Set the color of the squares in the column of four to blank
-        rowOfFour.forEach(square => currentColorArrangement[square] = '')
-        return true
-      }
-    }
-  }
-
-  const checkForColumnOfThree = () => {
-    for (let i = 0; i < 47; i++) {
-      // Check if the current square is in the last two columns
-      const columnOfThree = [i, i + width, i + width * 2]
-      // Get the color of the current square
-      const decidedColor = currentColorArrangement[i]
-      // Check if the current square is blank
-      const isBlank = currentColorArrangement[i] === ''
-
-      // Check if all squares in the column of three have the same color and are not blank
-      if (columnOfThree.every(square => currentColorArrangement[square] === decidedColor && !isBlank)) {
-        console.log('column of three');
-        // Set the color of the squares in the column of three to blank
-        columnOfThree.forEach(square => currentColorArrangement[square] = '')
-        return true
-      }
-    }
-  }
-
-  const checkForRowOfThree = () => {
-    for (let i = 0; i < 64; i++) {
-      // Check if the current square is in the last two columns
-      const rowOfThree = [i, i + 1, i + 2]
-      // Get the color of the current square
-      const decidedColor = currentColorArrangement[i]
-      const notValid = [6, 7, 14, 15, 22, 23, 30, 31, 38, 39, 46, 47, 54, 55, 63, 64]
-
-      if (notValid.includes(i)) continue
-
-      // Check if all squares in the row of three have the same color and are not blank
-      if (rowOfThree.every(square => currentColorArrangement[square] === decidedColor && !isBlank)) {
-        // console.log('row of three');
-        // Set the color of the squares in the column of three to blank
-        rowOfThree.forEach(square => currentColorArrangement[square] = '')
-        return true
-      }
-    }
-  }
-
-
-  const createBoard = () => {
-    const randomColorArrangement = []
-    for (let i = 0; i < width * width; i++){
-      const randomColor = candyColors[Math.floor(Math.random() * candyColors.length)]
-      randomColorArrangement.push(randomColor)
-    }
-    // console.log(randomColorArrangement);
-    setCurrentColorArrangement(randomColorArrangement);
-  }
+  const [currentColorArrangement, setCurrentColorArrangement] = useState(createBoard)
+  // Use a ref to keep track of the index of the candy being dragged.
+  const draggedCandy = useRef(null)
+  const [scoreDisplay, setScoreDisplay] = useState(0)
 
   useEffect(() => {
-    createBoard()
-  }, [])
-
-  useEffect(() => {
+    // Set up a timer to check for matches every 100 milliseconds.
     const timer = setInterval(() => {
-      checkForColumnOfFour()
-      checkForRowOfFour()
-      checkForColumnOfThree()
-      checkForRowOfThree()
+      const matches = findMatches(currentColorArrangement)
 
-      // Update the state to trigger a re-render
-      setCurrentColorArrangement([...currentColorArrangement])
+      if (matches.size > 0) {
+        // Update the score and resolve the matches on the board.
+        setScoreDisplay(score => score + matches.size)
+        // Use the functional form of setCurrentColorArrangement to ensure we have the latest board state.
+        setCurrentColorArrangement(board => resolveMatches(board))
+      }
     }, 100)
+
     return () => clearInterval(timer)
+  }, [currentColorArrangement])
 
-  }, [checkForColumnOfFour, checkForRowOfFour, checkForColumnOfThree, checkForRowOfThree, currentColorArrangement])
+  // Only accept a drop when a candy was picked up from the board.
+  const handleDrop = (targetIndex, event) => {
+    event.preventDefault()
+    // Use the ref to get the index of the candy being dragged.
+    const sourceIndex = draggedCandy.current
 
-  console.log(currentColorArrangement);
-  
+    // Swap the candies on the board if a candy was being dragged.
+    if (sourceIndex !== null) {
+      // Use the functional form of setCurrentColorArrangement to ensure we have the latest board state.
+      setCurrentColorArrangement(board => swapCandies(board, sourceIndex, targetIndex))
+    }
+    // Reset the dragged candy index after the drop.
+    draggedCandy.current = null
+  }
 
   return (
     <div className="app">
+      <ScoreBoard score={scoreDisplay}/>
       <div className="game">
         {currentColorArrangement.map((candyColor, index) => (
-            <img 
-              key={index} 
-              style={{backgroundColor: candyColor}}
-              alt={candyColor} 
-            />
-          ))
-        }
+          <img
+            key={index}
+            src={candyImages[candyColor]}
+            alt={candyColor}
+            draggable
+            onDragStart={() => {
+              draggedCandy.current = index
+            }}
+            onDragOver={event => event.preventDefault()}
+            onDrop={event => handleDrop(index, event)}
+            onDragEnd={() => {
+              draggedCandy.current = null
+            }}
+          />
+        ))}
       </div>
     </div>
   )

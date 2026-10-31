@@ -1,0 +1,127 @@
+{
+  "planHash": "634786e734448112cd64f495c56628cb041cb8d6e7adc08979331d8286b4063d",
+  "phase": "standalone",
+  "recordedAtUtc": "2026-10-31T11:35:43.7612390Z",
+  "retryCount": 3,
+  "resetBaseline": false,
+  "complete": true,
+  "result": {
+    "setupSucceeded": true,
+    "setupDurationMs": 0,
+    "setupFailureOutput": null,
+    "assertions": [
+      {
+        "name": "lint-pass",
+        "kind": "process",
+        "verificationMethod": "exit-code",
+        "passed": true,
+        "timedOut": false,
+        "skipped": false,
+        "skippedReason": null,
+        "exitCode": 0,
+        "outputSample": "\r\n\u003E candy_crush_app@0.0.0 lint\r\n\u003E eslint .\r\n\r\n",
+        "durationMs": 10433
+      },
+      {
+        "name": "tests-pass",
+        "kind": "process",
+        "verificationMethod": "test-results",
+        "passed": true,
+        "timedOut": false,
+        "skipped": false,
+        "skippedReason": null,
+        "exitCode": 0,
+        "outputSample": "\r\n\u003E candy_crush_app@0.0.0 test\r\n\u003E node --test --test-reporter=tap\r\n\r\nTAP version 13\r\n# Subtest: finds horizontal and vertical matches without wrapping rows\r\nok 1 - finds horizontal and vertical matches without wrapping rows\r\n  ---\r\n  duration_ms: 6.6671\r\n  type: \u0027test\u0027\r\n  ...\r\n# Subtest: swaps adjacent candies only when the move creates a match\r\nok 2 - swaps adjacent candies only when the move creates a match\r\n  ---\r\n  duration_ms: 0.5645\r\n  type: \u0027test\u0027\r\n  ...\r\n# Subtest: clears matches, drops candies, and refills the board\r\nok 3 - clears matches, drops candies, and refills the board\r\n  ---\r\n  duration_ms: 0.5259\r\n  type: \u0027test\u0027\r\n  ...\r\n1..3\r\n# tests 3\r\n# suites 0\r\n# pass 3\r\n# fail 0\r\n# cancelled 0\r\n# skipped 0\r\n# todo 0\r\n# duration_ms 288.4734\r\n",
+        "durationMs": 1920,
+        "testResults": {
+          "testFramework": "unknown",
+          "runnerDetectedFrom": "none",
+          "testsTotal": 0,
+          "testsPassed": 0,
+          "testsFailed": 0,
+          "testsSkipped": 0,
+          "parseFailed": true
+        }
+      },
+      {
+        "name": "production-build",
+        "kind": "process",
+        "verificationMethod": "exit-code",
+        "passed": true,
+        "timedOut": false,
+        "skipped": false,
+        "skippedReason": null,
+        "exitCode": 0,
+        "outputSample": "\r\n\u003E candy_crush_app@0.0.0 build\r\n\u003E vite build\r\n\r\n\u001B[36mvite v8.3.5 \u001B[32mbuilding client environment for production...\u001B[36m\u001B[39m\r\ntransforming...\r\n\u2713 23 modules transformed.\r\nrendering chunks...\r\ncomputing gzip size...\r\ndist/index.html                            0.44 kB \u2502 gzip:  0.30 kB\r\ndist/assets/green-candy-KuhDm9gd.png     524.12 kB\r\ndist/assets/yellow-candy-DQuOR8R2.png    566.48 kB\r\ndist/assets/orange-candy-BEf6Uvlw.png    664.97 kB\r\ndist/assets/red-candy-C5DcL6wb.png       696.10 kB\r\ndist/assets/blue-candy-DQIEqMMB.png    1,083.31 kB\r\ndist/assets/purple-candy-D-G73joR.png  1,136.40 kB\r\ndist/assets/index-DBYPFhe0.css             0.12 kB \u2502 gzip:  0.10 kB\r\ndist/assets/index-DT235MGc.js            221.21 kB \u2502 gzip: 69.35 kB\r\n\r\n\u001B[32m\u2713 built in 508ms\u001B[39m\r\n",
+        "durationMs": 3212
+      },
+      {
+        "name": "home-page-http-200",
+        "kind": "http-probe",
+        "verificationMethod": "http-status",
+        "passed": true,
+        "timedOut": false,
+        "skipped": false,
+        "skippedReason": null,
+        "exitCode": null,
+        "outputSample": "HTTP 200\n\u003C!doctype html\u003E\n\u003Chtml lang=\u0022en\u0022\u003E\n\n\u003Chead\u003E\n  \u003Cscript type=\u0022module\u0022\u003Eimport { injectIntoGlobalHook } from \u0022/@react-refresh\u0022;\ninjectIntoGlobalHook(window);\nwindow.$RefreshReg$ = () =\u003E {};\nwindow.$RefreshSig$ = () =\u003E (type) =\u003E type;\u003C/script\u003E\n\n  \u003Cscript type=\u0022module\u0022 src=\u0022/@vite/client\u0022\u003E\u003C/script\u003E\n\n  \u003Cmeta charset=\u0022UTF-8\u0022 /\u003E\n  \u003Clink rel=\u0022icon\u0022 type=\u0022image/svg\u002Bxml\u0022 href=\u0022/favicon.svg\u0022 /\u003E\n  \u003Cmeta name=\u0022viewport\u0022 content=\u0022width=device-width, initial-scale=1.0\u0022 /\u003E\n  \u003Ctitle\u003Ecandy_crush_app\u003C/title\u003E\n\u003C/head\u003E\n\n\u003Cbody\u003E\n  \u003Cdiv id=\u0022root\u0022\u003E\u003C/div\u003E\n  \u003Cscript type=\u0022module\u0022 src=\u0022/src/index.jsx\u0022\u003E\u003C/script\u003E\n\u003C/body\u003E\n\n\u003C/html\u003E\n--- server output ---\n\r\n\u003E candy_crush_app@0.0.0 dev\r\n\u003E vite --host 127.0.0.1 --port 5173 --strictPort\r\n\r\n\r\n  \u001B[32m\u001B[1mVITE\u001B[22m v8.3.5\u001B[39m  \u001B[2mready in \u001B[0m\u001B[1m976\u001B[22m\u001B[2m\u001B[0m ms\u001B[22m\r\n\r\n  \u001B[32m\u279C\u001B[39m  \u001B[1mLocal\u001B[22m:   \u001B[36mhttp://127.0.0.1:\u001B[1m5173\u001B[22m/\u001B[39m\r\n",
+        "durationMs": 3143
+      }
+    ],
+    "executions": [
+      {
+        "source": "lint-pass",
+        "resolvedExecutable": "C:\\Program Files\\nodejs\\npm.CMD",
+        "args": [
+          "run",
+          "lint"
+        ],
+        "cwd": "E:\\ALEXANDRE\\Front End Path\\ReactJS and JavaScript\\FreeCodeCamp JavaScript\\vanilla-javascript-basic-projects-master\\JavaScript Game Walkthroughs\\candy_crush_reactjs\\candy_crush_app",
+        "env": {},
+        "prependPath": [],
+        "platform": "win32"
+      },
+      {
+        "source": "tests-pass",
+        "resolvedExecutable": "C:\\Program Files\\nodejs\\npm.CMD",
+        "args": [
+          "test"
+        ],
+        "cwd": "E:\\ALEXANDRE\\Front End Path\\ReactJS and JavaScript\\FreeCodeCamp JavaScript\\vanilla-javascript-basic-projects-master\\JavaScript Game Walkthroughs\\candy_crush_reactjs\\candy_crush_app",
+        "env": {},
+        "prependPath": [],
+        "platform": "win32"
+      },
+      {
+        "source": "production-build",
+        "resolvedExecutable": "C:\\Program Files\\nodejs\\npm.CMD",
+        "args": [
+          "run",
+          "build"
+        ],
+        "cwd": "E:\\ALEXANDRE\\Front End Path\\ReactJS and JavaScript\\FreeCodeCamp JavaScript\\vanilla-javascript-basic-projects-master\\JavaScript Game Walkthroughs\\candy_crush_reactjs\\candy_crush_app",
+        "env": {},
+        "prependPath": [],
+        "platform": "win32"
+      },
+      {
+        "source": "home-page-http-200",
+        "resolvedExecutable": "C:\\Program Files\\nodejs\\npm.CMD",
+        "args": [
+          "run",
+          "dev",
+          "--",
+          "--host",
+          "127.0.0.1",
+          "--port",
+          "5173",
+          "--strictPort"
+        ],
+        "cwd": "E:\\ALEXANDRE\\Front End Path\\ReactJS and JavaScript\\FreeCodeCamp JavaScript\\vanilla-javascript-basic-projects-master\\JavaScript Game Walkthroughs\\candy_crush_reactjs\\candy_crush_app",
+        "env": {},
+        "prependPath": [],
+        "platform": "win32"
+      }
+    ]
+  }
+}

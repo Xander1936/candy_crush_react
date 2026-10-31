@@ -1,25 +1,38 @@
 # Candy Crush in React
 
-This project is inspired by Ania Kubow's [Candy Crush tutorial](https://www.youtube.com/watch?v=PBrEq9Wd6_U).
+This project is inspired by the Ania Kubow's [Candy Crush tutorial](https://www.youtube.com/watch?v=PBrEq9Wd6_U).
 
-### To Start This Project
+## Getting started
 
-### `npm install`
+Install the project dependencies:
 
-Install the project dependencies by running this command in your terminal.
+```sh
+npm install
+```
 
-In the project directory, you can run:
+Start the development server:
 
-### `npm run dev`
+```sh
+npm run dev
+```
 
-Starts the app in development mode.\
-Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
+Open [http://localhost:5173](http://localhost:5173) in your browser. The page reloads automatically when you make changes.
 
-The page updates automatically when you make changes.\
-Run `npm run lint` to check for lint errors.
+## Available commands
 
+- `npm run dev` starts the Vite development server.
+- `npm run build` creates a production build.
+- `npm run lint` checks the project with ESLint.
+- `npm test` runs the game logic tests.
+- `npm run preview` serves the production build locally.
 
-### MIT License
+## How to play
+
+Drag a candy onto an adjacent candy to swap them. A swap is accepted only when it creates a match of at least three candies. Matched candies are cleared, the remaining candies fall, and new candies fill the empty spaces. The scoreboard tracks the number of matched candies.
+
+## License
+
+MIT License
 
 Copyright (c) 2020 Ania Kubow
 
